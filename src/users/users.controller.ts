@@ -22,6 +22,7 @@ import { DateRangeInputDto } from 'src/shared/dto/dateRangeInput.dto';
 import { OrderByInputDto, OrderDirection } from 'src/shared/dto/orderByInput.dto';
 import { ProfileDto } from 'src/auth/dto/profile.dto';
 import { SortedUserDto } from './dto/sortedUser.dto';
+import { UserIdInputDto } from 'src/shared/dto/userIdInput.dto';
 
 @ApiTags('UsersController')
 @ApiBearerAuth()
@@ -73,7 +74,7 @@ export class UsersController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<User> {
+  async findOne(@Param('id') id: UserIdInputDto['userId']): Promise<User> {
     return await this.usersService.getUser({ id });
   }
 
@@ -82,7 +83,10 @@ export class UsersController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @Roles(Role.Admin)
   @Patch(':id/update')
-  async update(@Param('id') id: string, @Body() updatedUserDto: UpdatedUserDto): Promise<UpdateResult> {
+  async update(
+    @Param('id') id: UserIdInputDto['userId'],
+    @Body() updatedUserDto: UpdatedUserDto,
+  ): Promise<UpdateResult> {
     return await this.usersService.update(+id, updatedUserDto);
   }
 
@@ -92,7 +96,7 @@ export class UsersController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @Roles(Role.Admin)
   @Delete(':id/delete')
-  async remove(@Param('id') id: string): Promise<DeleteResult> {
+  async remove(@Param('id') id: UserIdInputDto['userId']): Promise<DeleteResult> {
     return await this.usersService.remove(+id);
   }
 }

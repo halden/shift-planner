@@ -12,6 +12,7 @@ export class OrderByInputDto {
   @Expose()
   @ApiProperty({
     description: 'Order users by total hours (ASC|DESC|asc|desc)',
+    example: OrderDirection.DESC,
   })
   @IsEnum(OrderDirection)
   @Transform(({ value }) => value?.toUpperCase() || OrderDirection.DESC)
