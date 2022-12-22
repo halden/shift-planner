@@ -1,0 +1,19 @@
+# Common
+*.md
+Dockerfile*
+.dockerignore
+docker-compose.yml
+.DS_Store
+**/LICENSE
+.env
+# Git
+.git
+.gitignore
+# NodeJS
+node_modules
+npm-debug.log
+/dist
+coverage
+# IDE
+.idea
+.vscode
