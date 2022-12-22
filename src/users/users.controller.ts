@@ -68,14 +68,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Find a user' })
-  @ApiResponse({
-    status: 200,
-    description: 'Get the user',
-    type: ProfileDto,
-    schema: {
-      $ref: getSchemaPath(ProfileDto),
-    },
-  })
+  @ApiResponse({ status: 200, description: 'Get the user', type: ProfileDto })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseInterceptors(ClassSerializerInterceptor)
